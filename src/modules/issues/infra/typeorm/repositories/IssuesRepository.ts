@@ -1,9 +1,9 @@
 import { getYear } from 'date-fns';
 import { getRepository, Repository } from 'typeorm';
 
+import ICreateIssueDTO from '@modules/issues/dtos/ICreateIssueDTO';
 import IIssuesRepository from '@modules/issues/repositories/IIssuesRepository';
 
-import ICreateIssueDTO from '../../../dtos/ICreateIssueDTO';
 import Issue from '../entities/Issue';
 
 export default class IssuesRepository implements IIssuesRepository {
@@ -29,12 +29,15 @@ export default class IssuesRepository implements IIssuesRepository {
 
   let defaultTitle = 'none';
   if (!title) {
-   if (number === 1) {
-    defaultTitle = 'Janeiro-Abril';
-   } else if (number === 2) {
-    defaultTitle = 'Maio-Agosto';
-   } else if (number === 3) {
-    defaultTitle = 'Setembro-Dezembro';
+   switch (number) {
+    case 1:
+     defaultTitle = 'Janeiro-Abril';
+     break;
+    case 2:
+     defaultTitle = 'Maio-Agosto';
+     break;
+    case 3:
+     defaultTitle = 'Setembro-Dezembro';
    }
   }
 
