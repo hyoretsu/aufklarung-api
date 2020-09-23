@@ -1,4 +1,3 @@
-import { getYear } from 'date-fns';
 import { getRepository, Repository } from 'typeorm';
 
 import ICreateIssueDTO from '@modules/issues/dtos/ICreateIssueDTO';
@@ -13,41 +12,16 @@ export default class IssuesRepository implements IIssuesRepository {
   this.ormRepository = getRepository(Issue);
  }
 
- public async create({ title, description, isSpecial }: ICreateIssueDTO): Promise<Issue> {
-  const currentYear = getYear(Date.now());
-  const volume = currentYear - 2013;
-
-  let number: number | undefined;
-  if (isSpecial === false) {
-   const publishedIssues = await this.ormRepository.find({
-    where: {
-     publishing_date: currentYear,
-    },
-   });
-   number = publishedIssues.length + 1;
-  }
-
-  let defaultTitle = 'none';
-  if (!title) {
-   switch (number) {
-    case 1:
-     defaultTitle = 'Janeiro-Abril';
-     break;
-    case 2:
-     defaultTitle = 'Maio-Agosto';
-     break;
-    case 3:
-     defaultTitle = 'Setembro-Dezembro';
-   }
-  }
-
-  const issue = await this.ormRepository.create({
-   title: title || defaultTitle,
+ public async create({ title, volume, number, description, isSpecial }: ICreateIssueDTO): Promise<Issue> {
+  const issue = this.ormRepository.create({
+   title,
    volume,
    number,
    description,
    is_special: isSpecial,
   });
+
+  await this.ormRepository.save(issue);
 
   return issue;
  }
