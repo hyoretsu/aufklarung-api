@@ -1,4 +1,4 @@
-import { celebrate, Segments, Joi } from 'celebrate';
+import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
 
 import IssuesController from '../controllers/IssuesController';
