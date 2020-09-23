@@ -22,14 +22,10 @@ export default class CreateIssueService {
   const volume = currentYear - 2013;
 
   let number: number | undefined;
-  // if (isSpecial === false) {
-  //  const publishedIssues = await this.ormRepository.find({
-  //   where: {
-  //    publishing_date: currentYear,
-  //   },
-  //  });
-  //  number = publishedIssues.length + 1;
-  // }
+  if (!!isSpecial === false) {
+   const publishedIssues = await this.issuesRepository.findByYear(currentYear);
+   number = publishedIssues.length + 1;
+  }
 
   let defaultTitle = 'none';
   if (!title) {
