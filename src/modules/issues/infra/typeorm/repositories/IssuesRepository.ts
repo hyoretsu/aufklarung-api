@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, Raw, Repository } from 'typeorm';
 
 import ICreateIssueDTO from '@modules/issues/dtos/ICreateIssueDTO';
 import IIssuesRepository from '@modules/issues/repositories/IIssuesRepository';
@@ -22,6 +22,16 @@ export default class IssuesRepository implements IIssuesRepository {
   });
 
   await this.ormRepository.save(issue);
+
+  return issue;
+ }
+
+ public async findByYear(year: number): Promise<Issue[]> {
+  const issue = await this.ormRepository.find({
+   where: {
+    created_at: Raw(date => `to_char(${date},'YYYY') = '${year}'`),
+   },
+  });
 
   return issue;
  }
