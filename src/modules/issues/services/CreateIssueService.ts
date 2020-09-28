@@ -16,8 +16,8 @@ interface IRequest {
  title?: string;
  description?: string;
  isSpecial: number;
- coverFilename: string;
- coverEncoding: string;
+ coverFilename?: string;
+ coverEncoding?: string;
 }
 
 @injectable()
@@ -56,38 +56,40 @@ export default class CreateIssueService {
    }
   }
 
-  let formattedName = coverFilename
-   .replace(' ', '_')
-   .normalize('NFKD')
-   .replace(/[^\w-.]/g, '')
-   .split('.')[0]
-   .toLowerCase();
+  let formattedName: string | undefined;
+  if (coverFilename && coverEncoding) {
+   formattedName = coverFilename
+    .replace(' ', '_')
+    .normalize('NFKD')
+    .replace(/[^\w-.]/g, '')
+    .split('.')[0]
+    .toLowerCase();
+   if (coverEncoding !== 'image/png') {
+    await sharp(path.resolve(tmpFolder, coverFilename))
+     .png({
+      adaptiveFiltering: true,
+      compressionLevel: 0,
+      progressive: true,
+     })
+     .toFile(path.resolve(tmpFolder, `${formattedName}.png`));
 
-  if (coverEncoding !== 'image/png') {
-   await sharp(path.resolve(tmpFolder, coverFilename))
-    .png({
-     adaptiveFiltering: true,
-     compressionLevel: 0,
-     progressive: true,
-    })
-    .toFile(path.resolve(tmpFolder, `${formattedName}-1.png`));
+    await fs.promises.unlink(path.resolve(tmpFolder, coverFilename));
+   }
+   formattedName += '.png';
 
-   await fs.promises.unlink(path.resolve(tmpFolder, coverFilename));
+   await imagemin([`tmp/${formattedName}`], {
+    plugins: [
+     imageminPngquant({
+      dithering: 1,
+      quality: [0.7, 1],
+      speed: 10,
+      strip: true,
+     }),
+    ],
+   });
+
+   await this.storageProvider.saveFile(formattedName);
   }
-  formattedName += '.png';
-
-  await imagemin([`tmp/${formattedName}`], {
-   plugins: [
-    imageminPngquant({
-     dithering: 1,
-     quality: [0.7, 1],
-     speed: 10,
-     strip: true,
-    }),
-   ],
-  });
-
-  await this.storageProvider.saveFile(formattedName);
 
   const issue = await this.issuesRepository.create({
    title: title || defaultTitle,

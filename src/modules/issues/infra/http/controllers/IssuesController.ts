@@ -9,13 +9,22 @@ export default class IssuesController {
 
   const createIssue = container.resolve(CreateIssueService);
 
-  const issue = await createIssue.execute({
-   title,
-   description,
-   isSpecial,
-   coverFilename: req.file.filename,
-   coverEncoding: req.file.mimetype,
-  });
+  let issue;
+  if (req.file) {
+   issue = await createIssue.execute({
+    title,
+    description,
+    isSpecial,
+    coverFilename: req.file.filename,
+    coverEncoding: req.file.mimetype,
+   });
+  } else {
+   issue = await createIssue.execute({
+    title,
+    description,
+    isSpecial,
+   });
+  }
 
   return res.json(issue);
  }
