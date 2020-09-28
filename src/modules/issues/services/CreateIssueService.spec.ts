@@ -1,13 +1,16 @@
+import FakeStorageProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
+
 import FakeIssuesRepository from '../repositories/fakes/FakeIssuesRepository';
 import CreateIssueService from './CreateIssueService';
 
 let fakeIssuesRepository: FakeIssuesRepository;
+let fakeStorageProvider: FakeStorageProvider;
 let createIssue: CreateIssueService;
 
 describe('CreateIssue', () => {
  beforeEach(() => {
   fakeIssuesRepository = new FakeIssuesRepository();
-  createIssue = new CreateIssueService(fakeIssuesRepository);
+  createIssue = new CreateIssueService(fakeIssuesRepository, fakeStorageProvider);
  });
 
  it('should be able to create a new issue', async () => {
@@ -41,7 +44,7 @@ describe('CreateIssue', () => {
   expect(issue3.number).toBe(3);
  });
 
- it('should not have a number if issue is special', async () => {
+ it('should not give a number if issue is special', async () => {
   const issue = await createIssue.execute({
    isSpecial: 1,
   });
