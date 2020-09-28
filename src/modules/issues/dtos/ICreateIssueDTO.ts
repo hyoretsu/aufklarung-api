@@ -4,4 +4,5 @@ export default interface ICreateIssueDTO {
  number?: number;
  description?: string;
  isSpecial: boolean;
+ cover: string;
 }

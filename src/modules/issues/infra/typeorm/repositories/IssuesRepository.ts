@@ -12,13 +12,14 @@ export default class IssuesRepository implements IIssuesRepository {
   this.ormRepository = getRepository(Issue);
  }
 
- public async create({ title, volume, number, description, isSpecial }: ICreateIssueDTO): Promise<Issue> {
+ public async create({ title, volume, number, description, isSpecial, cover }: ICreateIssueDTO): Promise<Issue> {
   const issue = this.ormRepository.create({
    title,
    volume,
    number,
    description,
    is_special: isSpecial,
+   cover,
   });
 
   await this.ormRepository.save(issue);

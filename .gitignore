@@ -2,9 +2,8 @@
 /coverage
 /dist
 /node_modules
-temp/*
-!temp/.gitkeep
 tmp/*
 !tmp/.gitkeep
+!tmp/uploads/.gitkeep
 *.log
 .env

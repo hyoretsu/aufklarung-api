@@ -29,4 +29,7 @@ export default class Issue {
 
  @UpdateDateColumn()
  updated_at: Date;
+
+ @Column()
+ cover: string;
 }

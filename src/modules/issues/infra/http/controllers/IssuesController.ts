@@ -13,6 +13,8 @@ export default class IssuesController {
    title,
    description,
    isSpecial,
+   coverFilename: req.file.filename,
+   coverEncoding: req.file.mimetype,
   });
 
   return res.json(issue);
