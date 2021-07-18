@@ -1,0 +1,21 @@
+{
+ "comments": false,
+ "ignore": ["**/*.spec.ts", "src/@types/*", "src/dtos/*"],
+ "minified": true,
+ "plugins": [
+  [
+   "module-resolver",
+   {
+    "alias": {
+     "@config": "./src/config",
+     "@modules": "./src/modules",
+     "@shared": "./src/shared"
+    }
+   }
+  ],
+  "transform-typescript-metadata",
+  ["@babel/proposal-decorators", { "legacy": true }],
+  "@babel/proposal-class-properties"
+ ],
+ "presets": [["@babel/env", { "targets": { "node": "current" } }], "@babel/typescript"]
+}

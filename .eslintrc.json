@@ -4,12 +4,7 @@
   "node": true,
   "jest": true
  },
- "extends": [
-  "airbnb-base",
-  "plugin:@typescript-eslint/recommended",
-  "plugin:prettier/recommended",
-  "prettier/@typescript-eslint"
- ],
+ "extends": ["airbnb-base", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended", "prettier"],
  "globals": {
   "Atomics": "readonly",
   "SharedArrayBuffer": "readonly"
@@ -27,34 +22,20 @@
    {
     "selector": "interface",
     "format": ["PascalCase"],
-    "custom": {
-     "regex": "^I[A-Z]",
-     "match": true
-    }
+    "prefix": ["I"]
    }
   ],
   "@typescript-eslint/no-explicit-any": "off",
-  "@typescript-eslint/no-unused-vars": [
-   "error",
-   {
-    "argsIgnorePattern": "next"
-   }
-  ],
+  "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "next|opts|reply|request" }],
   "class-methods-use-this": "off",
   "default-case": "off",
-  "import/extensions": [
-   "error",
-   "ignorePackages",
-   {
-    "ts": "never"
-   }
-  ],
+  "import/extensions": ["error", "ignorePackages", { "ts": "never" }],
   "import/no-duplicates": "off",
   "import-helpers/order-imports": [
    "warn",
    {
     "newlinesBetween": "always",
-    "groups": ["module", "/^@/", ["parent", "sibling"]],
+    "groups": ["module", ["/^@config/", "/^@modules/", "/^@shared/"], ["parent", "sibling"]],
     "alphabetize": {
      "order": "asc",
      "ignoreCase": false
@@ -67,9 +48,5 @@
   "no-useless-constructor": "off",
   "prettier/prettier": "error"
  },
- "settings": {
-  "import/resolver": {
-   "typescript": {}
-  }
- }
+ "settings": { "import/resolver": { "typescript": {} } }
 }
