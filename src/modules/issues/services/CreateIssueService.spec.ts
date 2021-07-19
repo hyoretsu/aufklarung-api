@@ -17,7 +17,7 @@ describe('CreateIssue', () => {
   const issue = await createIssue.execute({
    title: 'test',
    description: '123',
-   isSpecial: 0,
+   isSpecial: false,
   });
 
   expect(issue).toHaveProperty('id');
@@ -27,13 +27,13 @@ describe('CreateIssue', () => {
 
  it('should be able to automatically assign numbers/titles', async () => {
   const issue1 = await createIssue.execute({
-   isSpecial: 0,
+   isSpecial: false,
   });
   const issue2 = await createIssue.execute({
-   isSpecial: 0,
+   isSpecial: false,
   });
   const issue3 = await createIssue.execute({
-   isSpecial: 0,
+   isSpecial: false,
   });
 
   expect(issue1.title).toBe('Janeiro-Abril');
@@ -46,7 +46,7 @@ describe('CreateIssue', () => {
 
  it('should not give a number if issue is special', async () => {
   const issue = await createIssue.execute({
-   isSpecial: 1,
+   isSpecial: true,
   });
 
   expect(issue.number).toBe(undefined);

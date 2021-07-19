@@ -15,7 +15,7 @@ import IIssuesRepository from '../repositories/IIssuesRepository';
 interface IRequest {
  title?: string;
  description?: string;
- isSpecial: number;
+ isSpecial: boolean;
  coverFilename?: string;
  coverEncoding?: string;
 }
@@ -37,7 +37,7 @@ export default class CreateIssueService {
   const volume = currentYear - 2013;
 
   let number: number | undefined;
-  if (!!isSpecial === false) {
+  if (isSpecial === false) {
    const publishedIssues = await this.issuesRepository.findByYear(currentYear);
    number = publishedIssues.length + 1;
   }
@@ -64,6 +64,7 @@ export default class CreateIssueService {
     .replace(/[^\w-.]/g, '')
     .split('.')[0]
     .toLowerCase();
+
    if (coverEncoding !== 'image/png') {
     await sharp(path.resolve(tmpFolder, coverFilename))
      .png({
@@ -96,7 +97,7 @@ export default class CreateIssueService {
    volume,
    number,
    description,
-   isSpecial: !!isSpecial,
+   isSpecial,
    cover: formattedName,
   });
 
