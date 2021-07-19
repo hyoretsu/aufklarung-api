@@ -37,12 +37,14 @@ export default class CreateIssueService {
   const volume = currentYear - 2013;
 
   let number: number | undefined;
+  // Assign a number based on existing issues
   if (isSpecial === false) {
    const publishedIssues = await this.issuesRepository.findByYear(currentYear);
    number = publishedIssues.length + 1;
   }
 
   let defaultTitle = 'none';
+  // Assign a title based on existing issues
   if (!title) {
    switch (number) {
     case 1:
@@ -57,7 +59,9 @@ export default class CreateIssueService {
   }
 
   let formattedName: string | undefined;
+  // Image conversion/compression/saving logic
   if (coverFilename && coverEncoding) {
+   // Normalize filenames
    formattedName = coverFilename
     .replace(' ', '_')
     .normalize('NFKD')
@@ -65,6 +69,7 @@ export default class CreateIssueService {
     .split('.')[0]
     .toLowerCase();
 
+   // Convert images to PNG
    if (coverEncoding !== 'image/png') {
     await sharp(path.resolve(tmpFolder, coverFilename))
      .png({
@@ -78,6 +83,7 @@ export default class CreateIssueService {
    }
    formattedName += '.png';
 
+   // Compress images
    await imagemin([`tmp/${formattedName}`], {
     plugins: [
      imageminPngquant({
@@ -89,6 +95,7 @@ export default class CreateIssueService {
     ],
    });
 
+   // Save images
    await this.storageProvider.saveFile(formattedName);
   }
 
