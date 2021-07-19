@@ -19,7 +19,7 @@ issuesRouter.post(
   [Segments.BODY]: {
    title: Joi.string(),
    description: Joi.string(),
-   isSpecial: Joi.number().required(),
+   isSpecial: Joi.boolean().required(),
   },
  }),
  issuesController.create,
