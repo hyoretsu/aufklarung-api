@@ -2834,10 +2834,10 @@ packages:
       simple-swizzle: 0.2.2
     dev: false
 
-  /color/3.2.0:
-    resolution: {integrity: sha512-4ximSqKXLTQmYLJuvrRHtpOqniR+ASoaVK+Rxdy6ZpfsLvUqtIM7oGGgopRG+O4p9NRv/AfuVD3jsvdxyXqozQ==}
+  /color/3.2.1:
+    resolution: {integrity: sha512-aBl7dZI9ENN6fUGC7mWpMTPNHmWUSNan9tuWN6ahh5ZLNk9baLJOnSMlrQkHcrfFgz2/RigjUVAjdx36VcemKA==}
     dependencies:
-      color-convert: 2.0.1
+      color-convert: 1.9.3
       color-string: 1.6.0
     dev: false
 
@@ -7246,7 +7246,7 @@ packages:
     engines: {node: '>=10'}
     requiresBuild: true
     dependencies:
-      color: 3.2.0
+      color: 3.2.1
       detect-libc: 1.0.3
       node-addon-api: 3.2.1
       prebuild-install: 6.1.3
