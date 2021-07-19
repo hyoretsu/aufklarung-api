@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import CreateIssueService from '@modules/issues/services/CreateIssueService';
+import ListIssuesService from '@modules/issues/services/ListIssuesService';
 
 export default class IssuesController {
  public async create(req: Request, res: Response): Promise<Response> {
@@ -27,5 +28,13 @@ export default class IssuesController {
   }
 
   return res.json(issue);
+ }
+
+ public async list(req: Request, res: Response): Promise<Response> {
+  const listIssues = container.resolve(ListIssuesService);
+
+  const issues = await listIssues.execute();
+
+  return res.json(issues);
  }
 }

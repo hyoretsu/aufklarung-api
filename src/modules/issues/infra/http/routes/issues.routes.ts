@@ -11,6 +11,7 @@ const issuesController = new IssuesController();
 
 const upload = multer(uploadConfig.multer);
 
+issuesRouter.get('/', issuesController.list);
 issuesRouter.post(
  '/create',
  upload.single('cover'),
