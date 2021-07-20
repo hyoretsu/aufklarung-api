@@ -24,5 +24,6 @@ issuesRouter.post(
  }),
  issuesController.create,
 );
+issuesRouter.get('/:id', issuesController.show);
 
 export default issuesRouter;

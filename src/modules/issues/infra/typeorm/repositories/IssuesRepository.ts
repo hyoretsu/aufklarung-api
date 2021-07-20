@@ -33,6 +33,12 @@ export default class IssuesRepository implements IIssuesRepository {
   return issues;
  }
 
+ public async findById(id: string): Promise<Issue | undefined> {
+  const issue = await this.ormRepository.findOne({ id });
+
+  return issue;
+ }
+
  public async findByYear(year: number): Promise<Issue[]> {
   const issue = await this.ormRepository.find({
    where: {
