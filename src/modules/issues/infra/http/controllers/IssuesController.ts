@@ -1,3 +1,4 @@
+import { classToClass } from 'class-transformer';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
@@ -35,6 +36,6 @@ export default class IssuesController {
 
   const issues = await listIssues.execute();
 
-  return res.json(issues);
+  return res.json(classToClass(issues));
  }
 }
