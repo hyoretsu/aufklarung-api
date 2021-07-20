@@ -32,6 +32,12 @@ export default class FakeIssuesRepository implements IIssuesRepository {
   return this.issues;
  }
 
+ public async findById(id: string): Promise<Issue | undefined> {
+  const foundIssue = this.issues.find(issue => issue.id === id);
+
+  return foundIssue;
+ }
+
  public async findByYear(year: number): Promise<Issue[]> {
   const foundIssues = this.issues.filter(issue => getYear(issue.created_at) === year);
 
