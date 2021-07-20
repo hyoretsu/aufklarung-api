@@ -1,5 +1,8 @@
 /* eslint-disable camelcase */
+import { Transform } from 'class-transformer';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+
+import uploadConfig from '@config/upload';
 
 @Entity('issues')
 export default class Issue {
@@ -31,5 +34,17 @@ export default class Issue {
  updated_at: Date;
 
  @Column()
+ @Transform(({ value: cover }) => {
+  if (!cover) {
+   return null;
+  }
+
+  switch (uploadConfig.driver) {
+   case 'disk':
+    return `${process.env.APP_API_URL}/files/${cover}`;
+   default:
+    return null;
+  }
+ })
  cover: string;
 }
