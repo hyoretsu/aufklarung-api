@@ -16,7 +16,6 @@
  },
  "plugins": ["@typescript-eslint", "eslint-plugin-import-helpers", "prettier"],
  "rules": {
-  "@typescript-eslint/camelcase": "off",
   "@typescript-eslint/naming-convention": [
    "error",
    {
@@ -27,6 +26,7 @@
   ],
   "@typescript-eslint/no-explicit-any": "off",
   "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "next|opts|reply|request" }],
+  "camelcase": "off",
   "class-methods-use-this": "off",
   "default-case": "off",
   "import/extensions": ["error", "ignorePackages", { "ts": "never" }],
