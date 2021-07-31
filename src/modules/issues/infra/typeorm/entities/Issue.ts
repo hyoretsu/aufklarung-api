@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import { Transform } from 'class-transformer';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
