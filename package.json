@@ -1,6 +1,6 @@
 {
  "name": "aufklarung-api",
- "version": "1.4.0",
+ "version": "1.4.1",
  "description": "API do site da Revista Aufklärung",
  "keywords": [
   "acadêmica",
@@ -32,6 +32,7 @@
   "start": "npm run build && node dist/shared/infra/http/server.js",
   "test": "jest --passWithNoTests",
   "typeorm": "tsnd -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+  "update": "pnpm up && git add package.json pnpm-lock.yaml",
   "prepare": "husky install"
  },
  "lint-staged": {
