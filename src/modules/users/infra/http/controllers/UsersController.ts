@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import CreateUserService from '@modules/users/services/CreateUserService';
+import ListUsersService from '@modules/users/services/ListUsersService';
 import ShowUserService from '@modules/users/services/ShowUserService';
 
 export default class UsersController {
@@ -23,6 +24,14 @@ export default class UsersController {
   });
 
   return res.json(user);
+ }
+
+ public async list(req: Request, res: Response): Promise<Response> {
+  const listUsers = container.resolve(ListUsersService);
+
+  const users = await listUsers.execute();
+
+  return res.json(users);
  }
 
  public async show(req: Request, res: Response): Promise<Response> {
