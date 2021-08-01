@@ -10,16 +10,21 @@ describe('ShowIssue', () => {
   showIssue = new ShowIssueService(fakeIssuesRepository);
  });
 
- it('should be able to successfully show an existing issue', async () => {
+ it('should be able to show an existing issue', async () => {
   const newIssue = await fakeIssuesRepository.create({
    title: 'test',
-   description: '123',
    isSpecial: false,
    volume: 1,
   });
 
-  const issue = showIssue.execute(newIssue.id);
+  const foundIssue = await showIssue.execute(newIssue.id);
 
-  expect(issue).toBeTruthy();
+  expect(foundIssue).toStrictEqual(foundIssue);
+ });
+
+ it('should not be able to show a non-existing issue', async () => {
+  const foundIssue = await showIssue.execute('testId');
+
+  expect(foundIssue).toBeUndefined();
  });
 });

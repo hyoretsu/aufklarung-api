@@ -10,16 +10,14 @@ describe('ListIssues', () => {
   listIssues = new ListIssuesService(fakeIssuesRepository);
  });
 
- it('should successfully list existing issues', async () => {
+ it('should be able to list existing issues', async () => {
   const issue1 = await fakeIssuesRepository.create({
    title: 'test1',
-   description: '123',
    isSpecial: false,
    volume: 1,
   });
   const issue2 = await fakeIssuesRepository.create({
    title: 'test2',
-   description: '123',
    isSpecial: false,
    volume: 1,
   });
