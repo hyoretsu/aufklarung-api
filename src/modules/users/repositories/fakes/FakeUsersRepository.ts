@@ -31,6 +31,12 @@ export default class FakeUsersRepository implements IUsersRepository {
   return foundUser;
  }
 
+ public async findById(id: string): Promise<User | undefined> {
+  const foundUser = this.users.find(user => user.id === id);
+
+  return foundUser;
+ }
+
  public async findByOrcid(orcid: number): Promise<User | undefined> {
   const foundUser = this.users.find(user => user.orcid === orcid);
 

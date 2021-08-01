@@ -23,5 +23,6 @@ usersRouter.post(
  }),
  usersController.create,
 );
+usersRouter.get('/:id', usersController.show);
 
 export default usersRouter;
