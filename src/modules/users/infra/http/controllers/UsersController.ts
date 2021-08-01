@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import CreateUserService from '@modules/users/services/CreateUserService';
+import ShowUserService from '@modules/users/services/ShowUserService';
 
 export default class UsersController {
  public async create(req: Request, res: Response): Promise<Response> {
@@ -20,6 +21,16 @@ export default class UsersController {
    orcid,
    lattes,
   });
+
+  return res.json(user);
+ }
+
+ public async show(req: Request, res: Response): Promise<Response> {
+  const { id } = req.params;
+
+  const showUser = container.resolve(ShowUserService);
+
+  const user = await showUser.execute(id);
 
   return res.json(user);
  }
