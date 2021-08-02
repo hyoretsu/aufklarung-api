@@ -12,8 +12,11 @@ export default class NewsRepository implements INewsRepository {
   this.ormRepository = getRepository(News);
  }
 
- public async create(newsData: ICreateNewsDTO): Promise<News> {
-  const news = this.ormRepository.create(newsData);
+ public async create({ publishingDate, ...newsData }: ICreateNewsDTO): Promise<News> {
+  const news = this.ormRepository.create({
+   ...newsData,
+   publishing_date: publishingDate,
+  });
 
   await this.ormRepository.save(news);
 
