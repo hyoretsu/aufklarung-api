@@ -12,7 +12,7 @@ export default class CreateNewsService {
   private newsRepository: INewsRepository,
  ) {}
 
- public async execute({ title, description, body }: ICreateNewsDTO): Promise<News> {
+ public async execute({ title, description, body, publishingDate }: ICreateNewsDTO): Promise<News> {
   const existingNews = await this.newsRepository.findSame({ title, description });
 
   if (existingNews) {
@@ -23,6 +23,7 @@ export default class CreateNewsService {
    title,
    description,
    body,
+   publishingDate,
   });
 
   return news;

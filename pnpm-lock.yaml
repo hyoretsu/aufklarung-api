@@ -2238,7 +2238,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.3
-      es-abstract: 1.18.4
+      es-abstract: 1.18.5
       get-intrinsic: 1.1.1
       is-string: 1.0.6
     dev: true
@@ -2259,7 +2259,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.3
-      es-abstract: 1.18.4
+      es-abstract: 1.18.5
     dev: true
 
   /assign-symbols/1.0.0:
@@ -3442,8 +3442,8 @@ packages:
     dependencies:
       is-arrayish: 0.2.1
 
-  /es-abstract/1.18.4:
-    resolution: {integrity: sha512-xjDAPJRxKc1uoTkdW8MEk7Fq/2bzz3YoCADYniDV7+KITCUdu9c90fj1aKI7nEZFZxRrHlDo3wtma/C6QkhlXQ==}
+  /es-abstract/1.18.5:
+    resolution: {integrity: sha512-DDggyJLoS91CkJjgauM5c0yZMjiD1uK3KcaCeAmffGwZ+ODWzOkPN4QwRbsK5DOFf06fywmyLci3ZD8jLGhVYA==}
     engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.2
@@ -6310,7 +6310,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.3
-      es-abstract: 1.18.4
+      es-abstract: 1.18.5
     dev: true
 
   /object.getownpropertydescriptors/2.1.2:
@@ -6319,7 +6319,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.3
-      es-abstract: 1.18.4
+      es-abstract: 1.18.5
     dev: true
 
   /object.pick/1.3.0:
@@ -6336,7 +6336,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       define-properties: 1.1.3
-      es-abstract: 1.18.4
+      es-abstract: 1.18.5
     dev: true
 
   /on-finished/2.3.0:
