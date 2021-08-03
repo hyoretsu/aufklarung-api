@@ -4,14 +4,20 @@ export default class FakeStorageProvider implements IStorageProvider {
  private storage: string[] = [];
 
  public async saveFile(file: string): Promise<string> {
-  this.storage.push(file);
+  const fileExists = this.storage.find(storedFile => storedFile === file);
+
+  if (!fileExists) {
+   this.storage.push(file);
+  }
 
   return file;
  }
 
  public async deleteFile(file: string): Promise<void> {
-  const foundFile = this.storage.findIndex(storedFile => storedFile === file);
+  const fileExists = this.storage.find(storedFile => storedFile === file);
 
-  this.storage.splice(foundFile, 1);
+  if (fileExists) {
+   this.storage = this.storage.filter(storedFile => storedFile !== file);
+  }
  }
 }
