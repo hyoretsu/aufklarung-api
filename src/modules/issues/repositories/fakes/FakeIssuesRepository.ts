@@ -13,6 +13,7 @@ export default class FakeIssuesRepository implements IIssuesRepository {
   const issue = new Issue();
   const date = new Date();
 
+  // Create issue object
   Object.assign(
    issue,
    {

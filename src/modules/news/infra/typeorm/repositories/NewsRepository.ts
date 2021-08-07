@@ -14,8 +14,8 @@ export default class NewsRepository implements INewsRepository {
 
  public async create({ publishingDate, ...newsData }: ICreateNewsDTO): Promise<News> {
   const news = this.ormRepository.create({
-   ...newsData,
    publishing_date: publishingDate,
+   ...newsData,
   });
 
   await this.ormRepository.save(news);
@@ -24,8 +24,11 @@ export default class NewsRepository implements INewsRepository {
  }
 
  public async findSame({ title, description }: Omit<ICreateNewsDTO, 'body'>): Promise<News | undefined> {
-  const foundNews = await this.ormRepository.findOne({ title, description });
+  const news = await this.ormRepository.findOne({
+   title,
+   description,
+  });
 
-  return foundNews;
+  return news;
  }
 }

@@ -11,6 +11,7 @@ export default class FakeUsersRepository implements IUsersRepository {
   const user = new User();
   const date = new Date();
 
+  // Create user object
   Object.assign(
    user,
    {

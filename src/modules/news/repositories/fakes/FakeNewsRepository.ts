@@ -12,6 +12,7 @@ export default class FakeNewsRepository implements INewsRepository {
   const news = new News();
   const date = new Date();
 
+  // Create news object
   Object.assign(
    news,
    {
