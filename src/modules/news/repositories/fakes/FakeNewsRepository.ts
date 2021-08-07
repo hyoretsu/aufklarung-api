@@ -27,6 +27,10 @@ export default class FakeNewsRepository implements INewsRepository {
   return news;
  }
 
+ public async findAll(): Promise<News[]> {
+  return this.news;
+ }
+
  public async findSame({ title, description }: Omit<ICreateNewsDTO, 'body'>): Promise<News | undefined> {
   const foundNews = this.news.find(news => {
    if (news.title === title && news.description === description) {
