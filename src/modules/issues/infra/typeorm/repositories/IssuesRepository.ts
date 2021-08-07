@@ -1,4 +1,4 @@
-import { getRepository, Raw, Repository } from 'typeorm';
+import { Between, getRepository, Repository } from 'typeorm';
 
 import ICreateIssueDTO from '@modules/issues/dtos/ICreateIssueDTO';
 import IIssuesRepository from '@modules/issues/repositories/IIssuesRepository';
@@ -12,14 +12,10 @@ export default class IssuesRepository implements IIssuesRepository {
   this.ormRepository = getRepository(Issue);
  }
 
- public async create({ title, volume, number, description, isSpecial, cover }: ICreateIssueDTO): Promise<Issue> {
+ public async create({ isSpecial, ...issueData }: ICreateIssueDTO): Promise<Issue> {
   const issue = this.ormRepository.create({
-   title,
-   volume,
-   number,
-   description,
    is_special: isSpecial,
-   cover,
+   ...issueData,
   });
 
   await this.ormRepository.save(issue);
@@ -40,10 +36,11 @@ export default class IssuesRepository implements IIssuesRepository {
  }
 
  public async findByYear(year: number): Promise<Issue[]> {
+  const startOfYear = new Date(year, 0, 1);
+  const endOfYear = new Date(year, 11, 31);
+
   const issue = await this.ormRepository.find({
-   where: {
-    created_at: Raw(date => `to_char(${date},'YYYY') = '${year}'`),
-   },
+   publishing_date: Between(startOfYear, endOfYear),
   });
 
   return issue;

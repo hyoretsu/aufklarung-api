@@ -21,8 +21,6 @@ describe('CreateIssue', () => {
   });
 
   expect(issue).toHaveProperty('id');
-  expect(issue.title).toBe('test');
-  expect(issue.description).toBe('123');
  });
 
  it('should be able to automatically assign numbers/titles', async () => {

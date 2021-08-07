@@ -38,6 +38,7 @@ export default class Issue {
    return null;
   }
 
+  // Determines which mask to apply based on storage solution
   switch (uploadConfig.driver) {
    case 'disk':
     return `${process.env.APP_API_URL}/files/${cover}`;

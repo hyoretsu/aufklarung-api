@@ -18,7 +18,7 @@ describe('CreateUser', () => {
  it('should be able to create an user', async () => {
   const user = await createUser.execute({
    email: 'test@email.com',
-   first_name: 'John',
+   first_name: 'Jane',
    last_name: 'Doe',
    password: '123123',
    university: 'UDCG',
