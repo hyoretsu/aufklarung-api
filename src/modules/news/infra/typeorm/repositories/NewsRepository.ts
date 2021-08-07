@@ -23,6 +23,12 @@ export default class NewsRepository implements INewsRepository {
   return news;
  }
 
+ public async findAll(): Promise<News[]> {
+  const news = await this.ormRepository.find();
+
+  return news;
+ }
+
  public async findSame({ title, description }: Omit<ICreateNewsDTO, 'body'>): Promise<News | undefined> {
   const news = await this.ormRepository.findOne({
    title,

@@ -6,6 +6,7 @@ import NewsController from '../controllers/NewsController';
 const newsRouter = Router();
 const newsController = new NewsController();
 
+newsRouter.get('/', newsController.list);
 newsRouter.post(
  '/',
  celebrate({
