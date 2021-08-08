@@ -18,5 +18,6 @@ newsRouter.post(
  }),
  newsController.create,
 );
+newsRouter.get('/:id', newsController.show);
 
 export default newsRouter;
