@@ -11,15 +11,15 @@ describe('ShowIssue', () => {
  });
 
  it('should be able to show an existing issue', async () => {
-  const newIssue = await fakeIssuesRepository.create({
+  const issue = await fakeIssuesRepository.create({
    title: 'test',
    isSpecial: false,
    volume: 1,
   });
 
-  const foundIssue = await showIssue.execute(newIssue.id);
+  const foundIssue = await showIssue.execute(issue.id);
 
-  expect(foundIssue).toStrictEqual(foundIssue);
+  expect(foundIssue).toStrictEqual(issue);
  });
 
  it('should not be able to show a non-existing issue', async () => {
