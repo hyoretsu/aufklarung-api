@@ -7,9 +7,12 @@ let fakeIssuesRepository: FakeIssuesRepository;
 let fakeStorageProvider: FakeStorageProvider;
 let createIssue: CreateIssueService;
 
+jest.mock('fs');
+
 describe('CreateIssue', () => {
  beforeEach(() => {
   fakeIssuesRepository = new FakeIssuesRepository();
+  fakeStorageProvider = new FakeStorageProvider();
   createIssue = new CreateIssueService(fakeIssuesRepository, fakeStorageProvider);
  });
 
@@ -48,5 +51,25 @@ describe('CreateIssue', () => {
   });
 
   expect(issue.number).toBe(undefined);
+ });
+
+ it('should be able to properly handle images', async () => {
+  const issue = await createIssue.execute({
+   isSpecial: false,
+   coverFilename: 'test.png',
+   coverEncoding: 'image/png',
+  });
+
+  expect(issue).toHaveProperty('cover', 'test.png');
+ });
+
+ it('should be able to properly handle images that are not PNG', async () => {
+  const issue = await createIssue.execute({
+   isSpecial: false,
+   coverFilename: 'test.jpg',
+   coverEncoding: 'image/jpeg',
+  });
+
+  expect(issue).toHaveProperty('cover', 'test.png');
  });
 });
