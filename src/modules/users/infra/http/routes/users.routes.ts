@@ -24,6 +24,17 @@ usersRouter.post(
  }),
  usersController.create,
 );
+usersRouter.post(
+ '/login',
+ celebrate({
+  [Segments.BODY]: {
+   email: Joi.string().email().required(),
+   password: Joi.string().required(),
+  },
+ }),
+ usersController.authenticate,
+);
+usersRouter.get('/logout', usersController.logout);
 usersRouter.get('/:id', usersController.show);
 
 export default usersRouter;

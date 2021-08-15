@@ -14,8 +14,9 @@
   "ecmaVersion": 11,
   "sourceType": "module"
  },
- "plugins": ["@typescript-eslint", "eslint-plugin-import-helpers", "prettier"],
+ "plugins": ["@typescript-eslint", "import-helpers", "prettier"],
  "rules": {
+  "@typescript-eslint/ban-ts-comment": "off",
   "@typescript-eslint/naming-convention": [
    "error",
    {
@@ -45,6 +46,7 @@
   "no-prototype-builtins": "off",
   "no-restricted-syntax": "off",
   "no-underscore-dangle": "off",
+  "no-unused-expressions": ["off", { "allowShortCircuit": true }],
   "no-useless-constructor": "off",
   "prettier/prettier": "error"
  },
