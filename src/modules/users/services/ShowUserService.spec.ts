@@ -1,3 +1,5 @@
+import AppError from '@shared/errors/AppError';
+
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import ShowUserService from './ShowUserService';
 
@@ -26,8 +28,6 @@ describe('ShowUser', () => {
  });
 
  it('should not be able to find a non-existing user', async () => {
-  const foundUser = await showUser.execute('testId');
-
-  expect(foundUser).toBeUndefined();
+  await expect(showUser.execute('testId')).rejects.toBeInstanceOf(AppError);
  });
 });

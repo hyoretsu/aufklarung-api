@@ -1,5 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
+import AppError from '@shared/errors/AppError';
+
 import Issue from '../infra/typeorm/entities/Issue';
 import IIssuesRepository from '../repositories/IIssuesRepository';
 
@@ -12,6 +14,10 @@ export default class ShowIssueService {
 
  public async execute(id: string): Promise<Issue | undefined> {
   const issue = await this.issuesRepository.findById(id);
+
+  if (!issue) {
+   throw new AppError('Este número não existe. Tente novamente', 404);
+  }
 
   return issue;
  }
