@@ -30,7 +30,7 @@ app.use(
  session({
   cookie: {
    // Total of 1 day
-   maxAge: 24 * 60 * 60,
+   maxAge: 24 * 60 * 60 * 1000,
    // Enables HTTPS on production env
    secure: isProduction,
   },
