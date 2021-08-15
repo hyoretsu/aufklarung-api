@@ -1,5 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 
+import AppError from '@shared/errors/AppError';
+
 import News from '../infra/typeorm/entities/News';
 import INewsRepository from '../repositories/INewsRepository';
 
@@ -12,6 +14,10 @@ export default class ShowNewsService {
 
  public async execute(id: string): Promise<News | undefined> {
   const news = await this.newsRepository.findById(id);
+
+  if (!news) {
+   throw new AppError('Esta notícia não existe. Tente novamente');
+  }
 
   return news;
  }

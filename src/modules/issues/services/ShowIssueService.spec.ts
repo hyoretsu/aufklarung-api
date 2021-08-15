@@ -1,3 +1,5 @@
+import AppError from '@shared/errors/AppError';
+
 import FakeIssuesRepository from '../repositories/fakes/FakeIssuesRepository';
 import ShowIssueService from './ShowIssueService';
 
@@ -23,8 +25,6 @@ describe('ShowIssue', () => {
  });
 
  it('should not be able to show a non-existing issue', async () => {
-  const foundIssue = await showIssue.execute('testId');
-
-  expect(foundIssue).toBeUndefined();
+  await expect(showIssue.execute('testId')).rejects.toBeInstanceOf(AppError);
  });
 });

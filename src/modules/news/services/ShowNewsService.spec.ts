@@ -1,3 +1,5 @@
+import AppError from '@shared/errors/AppError';
+
 import FakeNewsRepository from '../repositories/fakes/FakeNewsRepository';
 import ShowNewsService from './ShowNewsService';
 
@@ -23,8 +25,6 @@ describe('ShowNews', () => {
  });
 
  it('should not be able to show a non-existing news', async () => {
-  const foundNews = await showNews.execute('testId');
-
-  expect(foundNews).toBeUndefined();
+  await expect(showNews.execute('testId')).rejects.toBeInstanceOf(AppError);
  });
 });
