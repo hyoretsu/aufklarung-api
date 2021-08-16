@@ -6,5 +6,6 @@ declare module 'express-session' {
  interface Session {
   email: string;
   user_id: string;
+  is_admin: string;
  }
 }
