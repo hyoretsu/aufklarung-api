@@ -32,6 +32,7 @@ describe('AuthenticateUser', () => {
 
   expect(userInfo).toHaveProperty('email', user.email);
   expect(userInfo).toHaveProperty('user_id', user.id);
+  expect(userInfo).toHaveProperty('is_admin', false);
  });
 
  it('should not be able to authenticate a non-existing user', async () => {

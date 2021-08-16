@@ -13,6 +13,7 @@ interface ILoginDTO {
 interface ISessionInfo {
  email: string;
  user_id: string;
+ is_admin?: boolean;
 }
 
 @injectable()
@@ -41,6 +42,7 @@ export default class AuthenticateUserService {
   return {
    email: user.email,
    user_id: user.id,
+   is_admin: !!user.is_admin,
   };
  }
 }
