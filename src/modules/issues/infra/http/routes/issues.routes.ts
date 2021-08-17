@@ -1,4 +1,4 @@
-import { celebrate, Joi, Segments } from 'celebrate';
+import { celebrate, Joi } from 'celebrate';
 import { Router } from 'express';
 import multer from 'multer';
 
@@ -16,7 +16,7 @@ issuesRouter.post(
  '/',
  upload.single('cover'),
  celebrate({
-  [Segments.BODY]: {
+  body: {
    title: Joi.string(),
    description: Joi.string(),
    isSpecial: Joi.boolean().required(),

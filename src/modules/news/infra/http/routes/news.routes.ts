@@ -1,4 +1,4 @@
-import { celebrate, Joi, Segments } from 'celebrate';
+import { celebrate, Joi } from 'celebrate';
 import { Router } from 'express';
 
 import NewsController from '../controllers/NewsController';
@@ -10,7 +10,7 @@ newsRouter.get('/', newsController.list);
 newsRouter.post(
  '/',
  celebrate({
-  [Segments.BODY]: {
+  body: {
    title: Joi.string().required(),
    description: Joi.string().required(),
    body: Joi.string().required(),
