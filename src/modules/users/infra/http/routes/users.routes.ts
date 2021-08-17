@@ -27,6 +27,16 @@ usersRouter.post(
  usersController.create,
 );
 usersRouter.post(
+ '/admin',
+ ensureAuthenticated,
+ celebrate({
+  body: {
+   id: Joi.string().uuid().required(),
+  },
+ }),
+ usersController.toggleAdmin,
+);
+usersRouter.post(
  '/login',
  celebrate({
   body: {

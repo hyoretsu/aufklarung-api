@@ -5,6 +5,7 @@ import AuthenticateUserService from '@modules/users/services/AuthenticateUserSer
 import CreateUserService from '@modules/users/services/CreateUserService';
 import ListUsersService from '@modules/users/services/ListUsersService';
 import ShowUserService from '@modules/users/services/ShowUserService';
+import ToggleAdminService from '@modules/users/services/ToggleAdminService';
 
 export default class UsersController {
  public async authenticate(req: Request, res: Response): Promise<Response> {
@@ -65,5 +66,15 @@ export default class UsersController {
   const user = await showUser.execute(id);
 
   return res.json(user);
+ }
+
+ public async toggleAdmin(req: Request, res: Response): Promise<Response> {
+  const { id } = req.body;
+
+  const toggleAdmin = container.resolve(ToggleAdminService);
+
+  await toggleAdmin.execute(id);
+
+  return res.status(204).json();
  }
 }
