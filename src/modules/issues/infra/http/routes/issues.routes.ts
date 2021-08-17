@@ -3,6 +3,7 @@ import { Router } from 'express';
 import multer from 'multer';
 
 import uploadConfig from '@config/upload';
+import ensureAuthenticated from '@shared/infra/http/middlewares/ensureAuthenticated';
 
 import IssuesController from '../controllers/IssuesController';
 
@@ -14,6 +15,7 @@ const upload = multer(uploadConfig.multer);
 issuesRouter.get('/', issuesController.list);
 issuesRouter.post(
  '/',
+ ensureAuthenticated,
  upload.single('cover'),
  celebrate({
   body: {
