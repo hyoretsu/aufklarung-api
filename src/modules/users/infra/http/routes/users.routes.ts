@@ -1,4 +1,4 @@
-import { celebrate, Joi, Segments } from 'celebrate';
+import { celebrate, Joi } from 'celebrate';
 import { Router } from 'express';
 
 import UsersController from '../controllers/UsersController';
@@ -10,7 +10,7 @@ usersRouter.get('/', usersController.list);
 usersRouter.post(
  '/',
  celebrate({
-  [Segments.BODY]: {
+  body: {
    first_name: Joi.string().required(),
    last_name: Joi.string().required(),
    email: Joi.string().required(),
@@ -27,7 +27,7 @@ usersRouter.post(
 usersRouter.post(
  '/login',
  celebrate({
-  [Segments.BODY]: {
+  body: {
    email: Joi.string().email().required(),
    password: Joi.string().required(),
   },
