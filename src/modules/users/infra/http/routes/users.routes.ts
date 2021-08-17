@@ -1,12 +1,14 @@
 import { celebrate, Joi } from 'celebrate';
 import { Router } from 'express';
 
+import ensureAuthenticated from '@shared/infra/http/middlewares/ensureAuthenticated';
+
 import UsersController from '../controllers/UsersController';
 
 const usersRouter = Router();
 const usersController = new UsersController();
 
-usersRouter.get('/', usersController.list);
+usersRouter.get('/', ensureAuthenticated, usersController.list);
 usersRouter.post(
  '/',
  celebrate({
@@ -34,7 +36,7 @@ usersRouter.post(
  }),
  usersController.authenticate,
 );
-usersRouter.get('/logout', usersController.logout);
+usersRouter.get('/logout', ensureAuthenticated, usersController.logout);
 usersRouter.get('/:id', usersController.show);
 
 export default usersRouter;
