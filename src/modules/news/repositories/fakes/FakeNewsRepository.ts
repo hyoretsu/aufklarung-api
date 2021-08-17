@@ -1,3 +1,4 @@
+/* eslint-disable require-await */
 import { v4 as uuidv4 } from 'uuid';
 
 import News from '@modules/news/infra/typeorm/entities/News';

@@ -48,7 +48,8 @@
   "no-underscore-dangle": "off",
   "no-unused-expressions": ["off", { "allowShortCircuit": true }],
   "no-useless-constructor": "off",
-  "prettier/prettier": "error"
+  "prettier/prettier": "error",
+  "require-await": "error"
  },
  "settings": { "import/resolver": { "typescript": {} } }
 }
