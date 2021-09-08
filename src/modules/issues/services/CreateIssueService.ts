@@ -15,7 +15,7 @@ import IIssuesRepository from '../repositories/IIssuesRepository';
 interface IRequest {
  title?: string;
  description?: string;
- isSpecial: boolean;
+ is_special: boolean;
  coverFilename?: string;
  coverEncoding?: string;
 }
@@ -30,7 +30,7 @@ export default class CreateIssueService {
   private storageProvider: IStorageProvider,
  ) {}
 
- public async execute({ description, isSpecial, title, coverFilename, coverEncoding }: IRequest): Promise<Issue> {
+ public async execute({ description, is_special, title, coverFilename, coverEncoding }: IRequest): Promise<Issue> {
   const { tmpFolder } = uploadConfig;
 
   const currentYear = getYear(Date.now());
@@ -38,7 +38,7 @@ export default class CreateIssueService {
 
   let number: number | undefined;
   // Assign a number based on existing issues
-  if (isSpecial === false) {
+  if (is_special === false) {
    const publishedIssues = await this.issuesRepository.findByYear(currentYear);
    number = publishedIssues.length + 1;
   }
@@ -104,7 +104,7 @@ export default class CreateIssueService {
    volume,
    number,
    description,
-   isSpecial,
+   is_special,
    cover: formattedName,
   });
 

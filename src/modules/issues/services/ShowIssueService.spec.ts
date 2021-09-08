@@ -15,7 +15,7 @@ describe('ShowIssue', () => {
  it('should be able to show an existing issue', async () => {
   const issue = await fakeIssuesRepository.create({
    title: 'test',
-   isSpecial: false,
+   is_special: false,
    volume: 1,
   });
 

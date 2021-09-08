@@ -3,6 +3,6 @@ export default interface ICreateIssueDTO {
  volume: number;
  number?: number;
  description?: string;
- isSpecial: boolean;
+ is_special: boolean;
  cover?: string;
 }

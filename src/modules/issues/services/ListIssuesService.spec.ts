@@ -13,12 +13,12 @@ describe('ListIssues', () => {
  it('should be able to list existing issues', async () => {
   const issue1 = await fakeIssuesRepository.create({
    title: 'test1',
-   isSpecial: false,
+   is_special: false,
    volume: 1,
   });
   const issue2 = await fakeIssuesRepository.create({
    title: 'test2',
-   isSpecial: false,
+   is_special: false,
    volume: 1,
   });
 
