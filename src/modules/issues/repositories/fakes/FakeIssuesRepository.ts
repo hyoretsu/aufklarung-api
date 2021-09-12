@@ -12,7 +12,6 @@ export default class FakeIssuesRepository implements IIssuesRepository {
  public async create(issueData: ICreateIssueDTO): Promise<Issue> {
   const issue = new Issue();
 
-  // Create issue object
   Object.assign(issue, issueData);
   this.issues.push(issue);
 

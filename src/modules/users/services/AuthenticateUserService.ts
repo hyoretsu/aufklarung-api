@@ -27,13 +27,11 @@ export default class AuthenticateUserService {
  ) {}
 
  public async execute({ email, password }: ILoginDTO): Promise<ISessionInfo> {
-  // Check if an user with that email exists
   const user = await this.usersRepository.findByEmail(email);
   if (!user) {
    throw new AppError('Um usuário com este email não existe. Tente novamente', 404);
   }
 
-  // Check if the password sent matches the stored one
   const isPasswordCorrect = await this.hashProvider.compare(password, user.password);
   if (isPasswordCorrect === false) {
    throw new AppError('Senha incorreta. Tente novamente', 401);

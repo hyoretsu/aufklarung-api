@@ -10,7 +10,6 @@ export default class FakeNewsRepository implements INewsRepository {
  public async create(newsData: ICreateNewsDTO): Promise<News> {
   const news = new News();
 
-  // Create news object
   Object.assign(news, newsData);
   this.news.push(news);
 

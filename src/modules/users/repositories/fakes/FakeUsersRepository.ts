@@ -9,7 +9,6 @@ export default class FakeUsersRepository implements IUsersRepository {
  public async create(userInfo: ICreateUserDTO): Promise<User> {
   const user = new User();
 
-  // Create user object
   Object.assign(user, userInfo);
   this.users.push(user);
 

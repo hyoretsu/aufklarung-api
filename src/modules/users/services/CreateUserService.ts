@@ -18,13 +18,11 @@ export default class CreateUserService {
  ) {}
 
  public async execute({ email, password, orcid, ...userInfo }: ICreateUserDTO): Promise<User> {
-  // Check if email's already registered
   const existingEmail = await this.usersRepository.findByEmail(email);
   if (existingEmail) {
    throw new AppError('Um usuário com este email já existe', 403);
   }
 
-  // Check if ORCID's already registered
   if (orcid) {
    const existingOrcid = await this.usersRepository.findByOrcid(orcid);
 
@@ -33,10 +31,8 @@ export default class CreateUserService {
    }
   }
 
-  // Hash password
   const hashedPassword = await this.hashProvider.generate(password);
 
-  // Create user
   const user = await this.usersRepository.create({
    email,
    password: hashedPassword,

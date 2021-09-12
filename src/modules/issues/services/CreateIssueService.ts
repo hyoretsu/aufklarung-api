@@ -95,7 +95,6 @@ export default class CreateIssueService {
     ],
    });
 
-   // Save images
    await this.storageProvider.saveFile(formattedName);
   }
 
