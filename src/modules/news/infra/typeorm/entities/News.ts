@@ -1,9 +1,10 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { v4 as uuid } from 'uuid';
 
 @Entity('news')
 export default class News {
  @PrimaryGeneratedColumn('uuid')
- id: string;
+ id = uuid();
 
  @Column()
  title: string;
@@ -18,8 +19,8 @@ export default class News {
  publishing_date?: Date;
 
  @CreateDateColumn()
- created_at: Date;
+ created_at = new Date();
 
  @UpdateDateColumn()
- updated_at: Date;
+ updated_at = new Date();
 }

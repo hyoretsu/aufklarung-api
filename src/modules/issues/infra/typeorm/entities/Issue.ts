@@ -1,12 +1,13 @@
 import { Transform } from 'class-transformer';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import { v4 as uuid } from 'uuid';
 
 import uploadConfig from '@config/upload';
 
 @Entity('issues')
 export default class Issue {
  @PrimaryGeneratedColumn('uuid')
- id: string;
+ id = uuid();
 
  @Column()
  title: string;
@@ -27,10 +28,10 @@ export default class Issue {
  is_special: boolean;
 
  @CreateDateColumn()
- created_at: Date;
+ created_at = new Date();
 
  @UpdateDateColumn()
- updated_at: Date;
+ updated_at = new Date();
 
  @Column()
  @Transform(({ value: cover }) => {

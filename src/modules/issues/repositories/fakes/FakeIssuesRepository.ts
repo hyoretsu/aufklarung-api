@@ -1,6 +1,5 @@
 /* eslint-disable require-await */
 import { getYear } from 'date-fns';
-import { v4 as uuidv4 } from 'uuid';
 
 import Issue from '@modules/issues/infra/typeorm/entities/Issue';
 
@@ -12,18 +11,9 @@ export default class FakeIssuesRepository implements IIssuesRepository {
 
  public async create(issueData: ICreateIssueDTO): Promise<Issue> {
   const issue = new Issue();
-  const date = new Date();
 
   // Create issue object
-  Object.assign(
-   issue,
-   {
-    id: uuidv4(),
-    created_at: date,
-    updated_at: date,
-   },
-   issueData,
-  );
+  Object.assign(issue, issueData);
   this.issues.push(issue);
 
   return issue;
