@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import CreateArticleService from '@modules/articles/services/CreateArticleService';
+import ShowArticleService from '@modules/articles/services/ShowArticleService';
 
 export default class ArticlesController {
  public async create(req: Request, res: Response): Promise<Response> {
@@ -18,6 +19,16 @@ export default class ArticlesController {
    sponsor,
    reference_list,
   });
+
+  return res.json(article);
+ }
+
+ public async show(req: Request, res: Response): Promise<Response> {
+  const { id } = req.params;
+
+  const showArticle = container.resolve(ShowArticleService);
+
+  const article = await showArticle.execute(id);
 
   return res.json(article);
  }

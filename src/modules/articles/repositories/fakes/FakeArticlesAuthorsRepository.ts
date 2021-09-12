@@ -1,3 +1,4 @@
+/* eslint-disable require-await */
 import ILinkArticleDTO from '../../dtos/ILinkArticleDTO';
 import ArticleAuthor from '../../infra/typeorm/entities/ArticleAuthor';
 import IArticlesAuthorsRepository from '../IArticlesAuthorsRepository';

@@ -27,5 +27,6 @@ articlesRouter.post(
  }),
  articlesController.create,
 );
+articlesRouter.get('/:id', articlesController.show);
 
 export default articlesRouter;

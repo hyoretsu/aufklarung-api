@@ -19,4 +19,10 @@ export default class ArticlesRepository implements IArticlesRepository {
 
   return article;
  }
+
+ public async findById(id: string): Promise<Article | undefined> {
+  const foundArticle = await this.ormRepository.findOne({ id });
+
+  return foundArticle;
+ }
 }
