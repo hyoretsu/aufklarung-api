@@ -1,0 +1,24 @@
+import { Request, Response } from 'express';
+import { container } from 'tsyringe';
+
+import CreateArticleService from '@modules/articles/services/CreateArticleService';
+
+export default class ArticlesController {
+ public async create(req: Request, res: Response): Promise<Response> {
+  const { user_id } = req.session;
+  const { title, coauthors, section, sponsor, reference_list } = req.body;
+
+  const createArticle = container.resolve(CreateArticleService);
+
+  const article = await createArticle.execute({
+   authors: [user_id, ...coauthors],
+   file: req.file.filename,
+   title,
+   section,
+   sponsor,
+   reference_list,
+  });
+
+  return res.json(article);
+ }
+}
