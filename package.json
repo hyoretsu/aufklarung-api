@@ -1,6 +1,6 @@
 {
  "name": "aufklarung-api",
- "version": "1.13.0",
+ "version": "1.13.1",
  "description": "API do site da Revista Aufklärung",
  "keywords": [
   "acadêmica",
@@ -29,7 +29,7 @@
  "scripts": {
   "build": "babel src --extensions .ts --out-dir dist --copy-files --no-copy-ignored --source-maps",
   "dev": "tsnd -r tsconfig-paths/register --inspect --no-notify --respawn -T -I /node_modules/ src/shared/infra/http/server.ts",
-  "start": "npm run build && node dist/shared/infra/http/server.js",
+  "start": "node dist/shared/infra/http/server.js",
   "test": "jest --passWithNoTests",
   "typeorm": "tsnd -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
   "update": "pnpm up && git add package.json pnpm-lock.yaml",

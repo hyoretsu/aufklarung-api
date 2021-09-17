@@ -1,48 +1,20 @@
 {
  "env": {
-  "es6": true,
-  "node": true,
-  "jest": true
+  "es6": true
  },
- "extends": ["airbnb-base", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended", "prettier"],
+ "extends": ["airbnb-base", "plugin:prettier/recommended", "prettier"],
  "globals": {
   "Atomics": "readonly",
   "SharedArrayBuffer": "readonly"
  },
- "parser": "@typescript-eslint/parser",
  "parserOptions": {
-  "ecmaVersion": 11,
   "sourceType": "module"
  },
- "plugins": ["@typescript-eslint", "import-helpers", "prettier"],
+ "plugins": ["prettier"],
  "rules": {
-  "@typescript-eslint/ban-ts-comment": "off",
-  "@typescript-eslint/naming-convention": [
-   "error",
-   {
-    "selector": "interface",
-    "format": ["PascalCase"],
-    "prefix": ["I"]
-   }
-  ],
-  "@typescript-eslint/no-explicit-any": "off",
-  "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "next|opts|reply|request" }],
   "camelcase": "off",
   "class-methods-use-this": "off",
   "default-case": "off",
-  "import/extensions": ["error", "ignorePackages", { "ts": "never" }],
-  "import/no-duplicates": "off",
-  "import-helpers/order-imports": [
-   "warn",
-   {
-    "newlinesBetween": "always",
-    "groups": ["module", ["/^@config/", "/^@modules/", "/^@shared/"], ["parent", "sibling"]],
-    "alphabetize": {
-     "order": "asc",
-     "ignoreCase": false
-    }
-   }
-  ],
   "no-prototype-builtins": "off",
   "no-restricted-syntax": "off",
   "no-underscore-dangle": "off",
@@ -51,5 +23,46 @@
   "prettier/prettier": "error",
   "require-await": "error"
  },
- "settings": { "import/resolver": { "typescript": {} } }
+ "overrides": [
+  {
+   "files": ["**/*.ts", "**/*.tsx"],
+   "env": {
+    "jest": true,
+    "node": true
+   },
+   "extends": ["plugin:@typescript-eslint/recommended"],
+   "parser": "@typescript-eslint/parser",
+   "parserOptions": {
+    "ecmaVersion": 11
+   },
+   "plugins": ["@typescript-eslint", "import-helpers"],
+   "rules": {
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/naming-convention": [
+     "error",
+     {
+      "selector": "interface",
+      "format": ["PascalCase"],
+      "prefix": ["I"]
+     }
+    ],
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "next|opts|reply|request" }],
+    "import/extensions": ["error", "ignorePackages", { "ts": "never" }],
+    "import/no-duplicates": "off",
+    "import-helpers/order-imports": [
+     "warn",
+     {
+      "newlinesBetween": "always",
+      "groups": ["module", ["/^@config/", "/^@modules/", "/^@shared/"], ["parent", "sibling"]],
+      "alphabetize": {
+       "order": "asc",
+       "ignoreCase": false
+      }
+     }
+    ]
+   },
+   "settings": { "import/resolver": { "typescript": {} } }
+  }
+ ]
 }
